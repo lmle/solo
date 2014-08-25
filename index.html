@@ -2,14 +2,30 @@
 <html ng-app="wtfsidn">
   <head>
     <title>What the F@!* Should I Do Now?</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
-    
-    <div ng-controller="mainController">{{ test }}</div>
 
-    <!-- <div ng-view></div> -->
+    <div ng-controller="MainCtrl">
+      <div ng-show="position">        
+        <p>{{ position | json }}</p>
+      </div>
+      <div ng-hide="position">
+        <p>{{ message }}</p>
+      </div>
+    </div>
+    
+<!-- 
+    <div ng-Controller="getLocationController">
+      <button ng-click="getLocation()">Get Location</button>
+      {{ test }}
+      {{ latitude }}
+    </div>
+
+    <div ng-Controller="mainController">
+      {{ test }}
+    </div> -->
 
   </body>
 </html>
