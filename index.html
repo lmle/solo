@@ -7,25 +7,17 @@
   </head>
   <body>
 
-    <div ng-controller="MainCtrl">
+    <div ng-controller="MainController">
+<!--       <button ng-click="getLocation()">Get location</button> -->
       <div ng-show="position">        
-        <p>{{ position | json }}</p>
+        <p>Position: {{ position }}</p>
+        <p>Longitude: {{ longitude }}</p>
+        <p>Latitude: {{ latitude }}</p>
       </div>
       <div ng-hide="position">
         <p>{{ message }}</p>
       </div>
     </div>
-    
-<!-- 
-    <div ng-Controller="getLocationController">
-      <button ng-click="getLocation()">Get Location</button>
-      {{ test }}
-      {{ latitude }}
-    </div>
-
-    <div ng-Controller="mainController">
-      {{ test }}
-    </div> -->
 
   </body>
 </html>

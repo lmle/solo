@@ -1,25 +1,6 @@
 angular.module('wtfsidn', [])
 
-// .factory('getLocation', function() {
-
-//   var latitude;
-//   var longitude;
-
-//   navigator.geolocation.getCurrentPosition(function(position) {
-//     latitude = position.coords.latitude;
-//     longitude = position.coords.longitude;
-//     console.log('navigator.geolocation');
-//   });
-
-//   return {
-//     latitude: latitude,
-//     longitude: longitude
-//   };
-
-// })
-
-
-.factory("GeolocationService", function ($q, $window, $rootScope) {
+.factory("GeolocationService", function($q, $window, $rootScope) {
     return function () {
         var deferred = $q.defer();
 
@@ -28,11 +9,11 @@ angular.module('wtfsidn', [])
                 deferred.reject(new Error("Geolocation is not supported"));
             });
         } else {
-            $window.navigator.geolocation.getCurrentPosition(function (position) {
+            $window.navigator.geolocation.getCurrentPosition(function(position) {
                 $rootScope.$apply(function() {
                     deferred.resolve(position);
                 });
-            }, function (error) {
+            }, function(error) {
                 $rootScope.$apply(function() {
                     deferred.reject(error);
                 });
@@ -43,42 +24,43 @@ angular.module('wtfsidn', [])
     }
 })
 
-.controller('MainCtrl', function ($scope, GeolocationService) {
+.factory('YelpDataService', function($http) {
+
+  var getYelpData = function() {
+    return $http({
+      method: 'GET',
+      url: 'http://127.0.0.1:8080/',
+      data: { whatintheworld: 'what' }
+    });
+  };
+
+  return {
+    getYelpData: getYelpData
+  };
+
+})
+
+.controller('MainController', function($scope, GeolocationService, YelpDataService) {
     $scope.position = null;
+
+    $scope.longitude = null;
+    $scope.latitude = null;
+
     $scope.message = "Determining gelocation...";
 
     GeolocationService().then(function (position) {
-        $scope.position = position;
+      $scope.position = position;
+      $scope.longitude = position.coords.longitude;
+      $scope.latitude = position.coords.latitude;
     }, function (reason) {
-        $scope.message = "Could not be determined."
+      $scope.message = "Could not be determined."
     });
+
+    YelpDataService.getYelpData()
+      .then(function(data) {
+        console.log('data from YelpDataService', data);
+      });
+
 })
-
-// .controller('getLocationController', function($scope) {
-
-//   $scope.test = "GETTING LOCATION!!";
-
-//   $scope.latitude = "nothing yet";
-
-//   $scope.longitude = "nothing yet";
-
-//   $scope.getLocation = function() {
-
-//     navigator.geolocation.getCurrentPosition().then(function(position) {
-//       $scope.latitude = position.coords.latitude;
-//       console.log('position lat', position.coords.latitude);
-//       console.log('$scope.lat inside', $scope.latitude);
-//       $scope.longitude = position.coords.longitude;
-//       console.log('position long', position.coords.longitude);
-//       console.log('$scope.long outside', $scope.longitude);
-//     });
-    
-//   }; 
-
-// })
-
-// .controller('mainController', function($scope) {
-//   $scope.test = 'howdy';
-// })
 
 ;
