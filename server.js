@@ -32,7 +32,7 @@ var handleRequest = function(req, res) {
 
   yelp.search({
     term: 'fun',
-    location: req.body.city
+    location: req.body.userLocation
     // cll: '-122.4092135,37.783729699999995'
   }, function(error, data) {
     if(error) { 

@@ -3,6 +3,8 @@
   <head>
 
     <title>What the F@!* Should I Do Now?</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
 
@@ -12,17 +14,17 @@
 
   </head>
   <body>
-
     <div ng-controller="MainController">
 
       <div ng-show="!suggestion">
-        <form name="GetCityForm" ng-submit="getYelpData()">
-          <input type="text" name="City" placeholder="San Francisco, CA" ng-model="city"></input>
+        <form name="GetUserLocation" ng-submit="getYelpData()">
+          <input type="text" name="UserLocation" placeholder="San Francisco, CA" ng-model="userLocation"></input>
           <input type="submit"></input>
         </form>
       </div>
 
       <div ng-show="suggestion">
+      
         What about <a href="{{ suggestion.url }}">{{ suggestion.name }}</a>?
 
         <p>
@@ -33,10 +35,12 @@
           A {{ suggestion.rating }} star rating, with {{ suggestion.review_count }} reviews.
         </p>
 
-        <p><button ng-click="generateSuggestion(yelpData)">Another?</button></p>
+        <p><button ng-click="generateSuggestion()">Another?</button></p>
+
+        <div id="map-canvas" style="width:650px; height:400px;" ng-click="resize()"></div>
+
       </div>
 
-      <div id="map-canvas" style="width:500px; height:500px;"></div>
 
     </div>
 
