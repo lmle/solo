@@ -26,11 +26,12 @@ angular.module('wtfsidn', [])
 
 .factory('YelpDataService', function($http) {
 
-  var getYelpData = function() {
+  var getYelpData = function(city) {
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: 'http://127.0.0.1:8080/',
-      data: { whatintheworld: 'what' }
+      data: 'city='+city,
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     });
   };
 
@@ -41,25 +42,53 @@ angular.module('wtfsidn', [])
 })
 
 .controller('MainController', function($scope, GeolocationService, YelpDataService) {
-    $scope.position = null;
 
-    $scope.longitude = null;
-    $scope.latitude = null;
+    var yelpData;
+    $scope.city;
+    $scope.suggestion = null;
 
-    $scope.message = "Determining gelocation...";
+    var randomNumber = function(length) {
+      return Math.floor(Math.random() * length);
+    };
 
-    GeolocationService().then(function (position) {
-      $scope.position = position;
-      $scope.longitude = position.coords.longitude;
-      $scope.latitude = position.coords.latitude;
-    }, function (reason) {
-      $scope.message = "Could not be determined."
-    });
+    $scope.getYelpData = function() {
+      YelpDataService.getYelpData($scope.city)
+        .then(function(data) {
 
-    YelpDataService.getYelpData()
-      .then(function(data) {
-        console.log('data from YelpDataService', data);
-      });
+          yelpData = data.data;
+
+          $scope.generateSuggestion();
+
+        });
+    };
+
+    $scope.generateSuggestion = function() {
+      var suggestion = yelpData[randomNumber(yelpData.length)];
+
+      $scope.suggestion = suggestion;
+    };
+
+
+    // $scope.position = null;
+
+    // $scope.longitude = null;
+    // $scope.latitude = null;
+
+    // $scope.message = "Determining gelocation...";
+
+    // GeolocationService().then(function (position) {
+    //   $scope.position = position;
+    //   $scope.longitude = position.coords.longitude;
+    //   $scope.latitude = position.coords.latitude;
+
+    //   YelpDataService.getYelpData($scope.longitude, $scope.latitude)
+    //     .then(function(data) {
+    //       console.log('data from YelpDataService', data);
+    //     });
+
+    // }, function (reason) {
+    //   $scope.message = "Could not be determined."
+    // });
 
 })
 

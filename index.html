@@ -8,15 +8,37 @@
   <body>
 
     <div ng-controller="MainController">
-<!--       <button ng-click="getLocation()">Get location</button> -->
-      <div ng-show="position">        
+
+    <div ng-show="!suggestion">
+      <form name="GetCityForm" ng-submit="getYelpData()">
+        <input type="text" name="City" placeholder="San Francisco, CA" ng-model="city"></input>
+        <input type="submit"></input>
+      </form>
+    </div>
+
+    <div ng-show="suggestion">
+      What about <a href="{{ suggestion.url }}">{{ suggestion.name }}</a>?
+
+      <p>
+        A {{ suggestion.rating }} star rating, with {{ suggestion.review_count }} reviews.
+      </p>
+
+      <p>
+        {{ suggestion.snippet_text }}
+      </p>
+
+      <p><button ng-click="generateSuggestion(yelpData)">Another?</button></p>
+    </div>
+
+<!--       <div ng-show="position">        
         <p>Position: {{ position }}</p>
         <p>Longitude: {{ longitude }}</p>
         <p>Latitude: {{ latitude }}</p>
       </div>
       <div ng-hide="position">
         <p>{{ message }}</p>
-      </div>
+      </div> -->
+
     </div>
 
   </body>
