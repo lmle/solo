@@ -2,42 +2,48 @@
 <html ng-app="wtfsidn">
   <head>
 
-    <title>What the F@!* Should I Do Now?</title>
+    <title>WHAT THE F@!* SHOULD I DO NOW?</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
-
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script> 
 
   </head>
-  <body>
-    <div ng-controller="MainController">
+  <body onload="addressInitialize()">
 
-      <div ng-show="!suggestion">
+    <div class="main" ng-controller="MainController">
+
+      <div id="locationField" ng-show="!suggestion">
+      <!-- <div id="locationField" ng-show="suggestion"> -->
+
+        <span class="title">What the F<span>@!*</span> Should I Do Now?</span>
+        <p class="underTitle"></p>
         <form name="GetUserLocation" ng-submit="getYelpData()">
-          <input type="text" name="UserLocation" placeholder="San Francisco, CA" ng-model="userLocation"></input>
-          <input type="submit"></input>
+          <input id="autocomplete" placeholder="Wait, where the f*$! are you?" type="text" ng-model="userLocation"></input>
+
+          <input type="submit" value="Hustle!"></input>
         </form>
+
       </div>
 
-      <div ng-show="suggestion">
-      
-        What about <a href="{{ suggestion.url }}">{{ suggestion.name }}</a>?
+      <div class="suggestion" ng-show="suggestion">
+      <!-- <div class="suggestion"> -->
 
-        <p>
-          {{ suggestionAddress }}
-        </p>
+        Get your ass to <a href="{{ suggestion.url }}" title="{{ suggestion.snippet_text }}" target="_blank">{{ suggestion.name }}</a>
+          
+        <span class="address"><span>Located at </span>{{ suggestionAddress }}</span>
 
-        <p>
-          A {{ suggestion.rating }} star rating, with {{ suggestion.review_count }} reviews.
-        </p>
+        <div id="map-canvas"></div>
 
-        <p><button ng-click="generateSuggestion()">Another?</button></p>
+        <button ng-click="generateSuggestion()">F@*$ that!</button>
 
-        <div id="map-canvas" style="width:650px; height:400px;" ng-click="resize()"></div>
+        <!-- <a class="goHome" href="/">Start over</a> -->
 
       </div>
 

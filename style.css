@@ -1,0 +1,113 @@
+body, form input#autocomplete, form input[type="submit"] {
+  font-family: 'Oswald';
+  text-transform: uppercase;
+}
+
+div.main {
+  text-align: center;
+}
+
+div#locationField {
+  margin: auto;
+  width: 90%;
+  padding-top: 100px;
+}
+
+div#map-canvas {
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 300px;
+  width: 100%;
+}
+
+div.suggestion {
+  font-size: 1.5em;
+  /*line-height: 2.5em;*/
+  padding-top: 15px;
+}
+
+div.suggestion a {
+  line-height: 1.3em;
+  font-size: 3em; 
+  /*font-size: 6vw;*/
+  color: #DF4949;
+  text-decoration: none;
+  display: block;
+}
+
+div.suggestion span.address {
+  /*margin-top: 30px;*/
+  display: block;
+  font-weight: bold;
+}
+
+div.suggestion span.address span {
+  /*line-height: 2.3em;*/
+  display: block;
+  font-size: 0.8em;
+}
+
+div.suggestion a:hover {
+/*  text-decoration: underline;*/
+}
+
+div.suggestion button {
+  font-family: 'Oswald';
+  font-size: 1.5em;
+  color: #DF4949;
+  background-color: transparent;
+  border: 3px solid #DF4949;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+/*div.suggestion a.goHome {
+  position: fixed;
+  top: 10px;
+  background-color: black;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.7em;
+}*/
+
+span.title {
+  font-size: 5em;
+  line-height: 0.8em;
+  letter-spacing: -0.03em;
+}
+
+span.title span {
+  color: #DF4949;
+}
+
+p.underTitle {
+  height: 75px;
+}
+
+form {
+}
+
+form input#autocomplete {
+  background-color: transparent;
+  margin-right: 5px;
+  font-size: 2em;
+  width: 60%;
+  border: none;
+  border-bottom: 3px solid #DF4949;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+   opacity: 0.3;
+}
+
+form input[type="submit"] {
+  /*padding: 0.2em;*/
+  color: #DF4949;
+  font-size: 2em;
+  border: 3px solid #DF4949;
+  border-radius: 5px;
+  background-color: transparent;
+}
