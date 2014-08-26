@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html ng-app="wtfsidn">
   <head>
+
     <title>What the F@!* Should I Do Now?</title>
     <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
   </head>
   <body>
 
     <div ng-controller="MainController">
 
-    <div ng-show="!suggestion">
-      <form name="GetCityForm" ng-submit="getYelpData()">
-        <input type="text" name="City" placeholder="San Francisco, CA" ng-model="city"></input>
-        <input type="submit"></input>
-      </form>
-    </div>
-
-    <div ng-show="suggestion">
-      What about <a href="{{ suggestion.url }}">{{ suggestion.name }}</a>?
-
-      <p>
-        A {{ suggestion.rating }} star rating, with {{ suggestion.review_count }} reviews.
-      </p>
-
-      <p>
-        {{ suggestion.snippet_text }}
-      </p>
-
-      <p><button ng-click="generateSuggestion(yelpData)">Another?</button></p>
-    </div>
-
-<!--       <div ng-show="position">        
-        <p>Position: {{ position }}</p>
-        <p>Longitude: {{ longitude }}</p>
-        <p>Latitude: {{ latitude }}</p>
+      <div ng-show="!suggestion">
+        <form name="GetCityForm" ng-submit="getYelpData()">
+          <input type="text" name="City" placeholder="San Francisco, CA" ng-model="city"></input>
+          <input type="submit"></input>
+        </form>
       </div>
-      <div ng-hide="position">
-        <p>{{ message }}</p>
-      </div> -->
+
+      <div ng-show="suggestion">
+        What about <a href="{{ suggestion.url }}">{{ suggestion.name }}</a>?
+
+        <p>
+          {{ suggestionAddress }}
+        </p>
+
+        <p>
+          A {{ suggestion.rating }} star rating, with {{ suggestion.review_count }} reviews.
+        </p>
+
+        <p><button ng-click="generateSuggestion(yelpData)">Another?</button></p>
+      </div>
+
+      <div id="map-canvas" style="width:500px; height:500px;"></div>
 
     </div>
 

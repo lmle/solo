@@ -43,9 +43,40 @@ angular.module('wtfsidn', [])
 
 .controller('MainController', function($scope, GeolocationService, YelpDataService) {
 
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    var initialize = function(lat, lng) {
+      directionsDisplay = new google.maps.DirectionsRenderer();
+      var start = new google.maps.LatLng(0,0);
+      var mapOptions = {
+        zoom:7,
+        center: start
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+      directionsDisplay.setMap(map);
+    }
+
+    var calcRoute = function(start, end){
+      var request = {
+          origin:start,
+          destination:end,
+          travelMode: google.maps.TravelMode.DRIVING
+      };
+      directionsService.route(request, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+        }
+      });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
     var yelpData;
     $scope.city;
     $scope.suggestion = null;
+    $scope.suggestionAddress = null;
 
     var randomNumber = function(length) {
       return Math.floor(Math.random() * length);
@@ -63,11 +94,14 @@ angular.module('wtfsidn', [])
     };
 
     $scope.generateSuggestion = function() {
-      var suggestion = yelpData[randomNumber(yelpData.length)];
+      $scope.suggestion = yelpData[randomNumber(yelpData.length)];
+      $scope.suggestionAddress = $scope.suggestion.location.display_address.join(' ');
+      
+      console.log('display_address:', $scope.suggestionAddress);
 
-      $scope.suggestion = suggestion;
+      calcRoute($scope.city, $scope.suggestionAddress);
+
     };
-
 
     // $scope.position = null;
 
