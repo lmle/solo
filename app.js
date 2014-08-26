@@ -1,23 +1,43 @@
 var placeSearch, autocomplete;
 
+var fillInAddress = function() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  var concatAddress = [];
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    console.log(place.address_components[i]);
+    // if (componentForm[addressType]) {
+    //   var val = place.address_components[i][componentForm[addressType]];
+    //   document.getElementById(addressType).value = val;
+    // }
+  }
+};
+
 var addressInitialize = function() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
   autocomplete = new google.maps.places.Autocomplete(
       (document.getElementById('autocomplete')),
       { types: ['geocode'] });
-}
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    fillInAddress();
+  });
+};
 
-function geolocate() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var geolocation = new google.maps.LatLng(
-          position.coords.latitude, position.coords.longitude);
-      autocomplete.setBounds(new google.maps.LatLngBounds(geolocation,
-          geolocation));
-    });
-  }
-}
+// function geolocate() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var geolocation = new google.maps.LatLng(
+//           position.coords.latitude, position.coords.longitude);
+//       autocomplete.setBounds(new google.maps.LatLngBounds(geolocation,
+//           geolocation));
+//     });
+//   }
+// }
 
 angular.module('wtfsidn', [])
 
@@ -119,7 +139,6 @@ angular.module('wtfsidn', [])
   // });
 
   var yelpData;
-  $scope.userLocation;
   $scope.suggestion = null;
   $scope.suggestionAddress = null;
 
@@ -128,7 +147,7 @@ angular.module('wtfsidn', [])
   };
 
   $scope.getYelpData = function() {
-    YelpDataService.getYelpData($scope.userLocation)
+    YelpDataService.getYelpData(document.getElementById('autocomplete').value)
       .then(function(data) {
 
         yelpData = data.data;
@@ -144,7 +163,7 @@ angular.module('wtfsidn', [])
     
     console.log('display_address:', $scope.suggestionAddress);
 
-    calcRoute($scope.userLocation, $scope.suggestionAddress);
+    calcRoute(document.getElementById('autocomplete').value, $scope.suggestionAddress);
   };
 
   // $scope.$watch('suggestion', function() {

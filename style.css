@@ -5,12 +5,13 @@ body, form input#autocomplete, form input[type="submit"] {
 
 div.main {
   text-align: center;
+  height: 100vh;
 }
 
 div#locationField {
   margin: auto;
   width: 90%;
-  padding-top: 100px;
+  padding-top: 15%;
 }
 
 div#map-canvas {
@@ -24,12 +25,14 @@ div#map-canvas {
 div.suggestion {
   font-size: 1.5em;
   /*line-height: 2.5em;*/
-  padding-top: 15px;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 div.suggestion a {
   line-height: 1.3em;
   font-size: 3em; 
+  letter-spacing: -0.03em;
   /*font-size: 6vw;*/
   color: #DF4949;
   text-decoration: none;
@@ -62,19 +65,9 @@ div.suggestion button {
   text-transform: uppercase;
 }
 
-/*div.suggestion a.goHome {
-  position: fixed;
-  top: 10px;
-  background-color: black;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  font-size: 0.7em;
-}*/
-
 span.title {
   font-size: 5em;
-  line-height: 0.8em;
+  line-height: 1em;
   letter-spacing: -0.03em;
 }
 
@@ -87,6 +80,16 @@ p.underTitle {
 }
 
 form {
+}
+
+div.suggestion a.goHome {
+  position: fixed;
+  top: 10px;
+  background-color: black;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.7em;
 }
 
 form input#autocomplete {

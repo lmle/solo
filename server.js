@@ -33,8 +33,8 @@ var handleRequest = function(req, res) {
   yelp.search({
     term: 'fun',
     // category_filter: 'active',
-    location: req.body.userLocation,
-    radius_filter: 40000
+    location: req.body.userLocation
+    // radius_filter: 40000
     // cll: '-122.4092135,37.783729699999995'
   }, function(error, data) {
     if(error) { 

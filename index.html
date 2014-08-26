@@ -7,7 +7,6 @@
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css" />
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -25,7 +24,7 @@
         <span class="title">What the F<span>@!*</span> Should I Do Now?</span>
         <p class="underTitle"></p>
         <form name="GetUserLocation" ng-submit="getYelpData()">
-          <input id="autocomplete" placeholder="Wait, where the f*$! are you?" type="text" ng-model="userLocation"></input>
+          <input id="autocomplete" placeholder="Wait, where the f*$! are you?" type="text"></input>
 
           <input type="submit" value="Hustle!"></input>
         </form>
@@ -43,7 +42,7 @@
 
         <button ng-click="generateSuggestion()">F@*$ that!</button>
 
-        <!-- <a class="goHome" href="/">Start over</a> -->
+        <a class="goHome" href="/">Start over</a>
 
       </div>
 
