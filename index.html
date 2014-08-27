@@ -7,6 +7,7 @@
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css" />
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="node_modules/angular/lib/angular.min.js"></script>
     <script src="app.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -19,7 +20,6 @@
     <div class="main" ng-controller="MainController">
 
       <div id="locationField" ng-show="!suggestion">
-      <!-- <div id="locationField" ng-show="suggestion"> -->
 
         <span class="title">What the F<span>@!*</span> Should I Do Now?</span>
         <p class="underTitle"></p>
@@ -32,7 +32,6 @@
       </div>
 
       <div class="suggestion" ng-show="suggestion">
-      <!-- <div class="suggestion"> -->
 
         Get your ass to <a href="{{ suggestion.url }}" title="{{ suggestion.snippet_text }}" target="_blank">{{ suggestion.name }}</a>
           

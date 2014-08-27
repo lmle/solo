@@ -16,8 +16,8 @@ div#locationField {
 
 div#map-canvas {
   margin: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 2%;
+  margin-bottom: 2%;
   height: 300px;
   width: 100%;
 }
@@ -76,7 +76,7 @@ span.title span {
 }
 
 p.underTitle {
-  height: 75px;
+  height: 50px;
 }
 
 form {
@@ -113,4 +113,9 @@ form input[type="submit"] {
   border: 3px solid #DF4949;
   border-radius: 5px;
   background-color: transparent;
+}
+
+button, input[type="submit"] {
+  /*cursor: pointer;*/
+  cursor: url(http://www.rjlsoftware.com/software/entertainment/finger/icons/finger.gif), auto;
 }

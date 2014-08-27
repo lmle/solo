@@ -1,69 +1,16 @@
+// $(function() {
+//   $('span.title').css('background-color', 'red');
+// });
+
 var placeSearch, autocomplete;
 
-var fillInAddress = function() {
-  // Get the place details from the autocomplete object.
-  var place = autocomplete.getPlace();
-
-  // Get each component of the address from the place details
-  // and fill the corresponding field on the form.
-  var concatAddress = [];
-  for (var i = 0; i < place.address_components.length; i++) {
-    var addressType = place.address_components[i].types[0];
-    console.log(place.address_components[i]);
-    // if (componentForm[addressType]) {
-    //   var val = place.address_components[i][componentForm[addressType]];
-    //   document.getElementById(addressType).value = val;
-    // }
-  }
-};
-
 var addressInitialize = function() {
-  // Create the autocomplete object, restricting the search
-  // to geographical location types.
   autocomplete = new google.maps.places.Autocomplete(
       (document.getElementById('autocomplete')),
       { types: ['geocode'] });
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    fillInAddress();
-  });
 };
 
-// function geolocate() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//       var geolocation = new google.maps.LatLng(
-//           position.coords.latitude, position.coords.longitude);
-//       autocomplete.setBounds(new google.maps.LatLngBounds(geolocation,
-//           geolocation));
-//     });
-//   }
-// }
-
 angular.module('wtfsidn', [])
-
-// .factory("GeolocationService", function($q, $window, $rootScope) {
-//     return function () {
-//         var deferred = $q.defer();
-
-//         if (!$window.navigator) {
-//             $rootScope.$apply(function() {
-//                 deferred.reject(new Error("Geolocation is not supported"));
-//             });
-//         } else {
-//             $window.navigator.geolocation.getCurrentPosition(function(position) {
-//                 $rootScope.$apply(function() {
-//                     deferred.resolve(position);
-//                 });
-//             }, function(error) {
-//                 $rootScope.$apply(function() {
-//                     deferred.reject(error);
-//                 });
-//             });
-//         }
-
-//         return deferred.promise;
-//     }
-// })
 
 .factory('YelpDataService', function($http) {
 
@@ -85,12 +32,11 @@ angular.module('wtfsidn', [])
 
 .controller('MainController', function($scope, YelpDataService) {
 
-  var map;
 
   // Google Directions    
+  var map;
   var directionsDisplay;
   var directionsService = new google.maps.DirectionsService();
-  // var map;
 
   var resize = function() {
     var center = map.getCenter();
@@ -107,7 +53,6 @@ angular.module('wtfsidn', [])
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     directionsDisplay.setMap(map);
-    // google.maps.event.trigger(map, 'resize');
     google.maps.event.addListener(map, 'mouseover', resize);
   };
 
@@ -125,18 +70,6 @@ angular.module('wtfsidn', [])
   };
 
   google.maps.event.addDomListener(window, 'load', mapInitialize);
-
-  // $scope.resize = function() {
-  //   var center = map.getCenter();
-  //   google.maps.event.trigger(map, "resize");
-  //   map.setCenter(center); 
-  // };
-
-  // google.maps.event.addDomListener(window, 'resize', function() {
-  //  var center = map.getCenter();
-  //  google.maps.event.trigger(map, "resize");
-  //  map.setCenter(center); 
-  // });
 
   var yelpData;
   $scope.suggestion = null;
@@ -165,37 +98,6 @@ angular.module('wtfsidn', [])
 
     calcRoute(document.getElementById('autocomplete').value, $scope.suggestionAddress);
   };
-
-  // $scope.$watch('suggestion', function() {
-  //   console.log('hey!!!!!!!!!!!!');
-  //   if(map) {
-  //     console.log('HAY!');
-  //     var center = map.getCenter();
-  //     google.maps.event.trigger(map, "resize");
-  //     map.setCenter(center); 
-  //   }
-  // });
-
-  // $scope.position = null;
-
-  // $scope.longitude = null;
-  // $scope.latitude = null;
-
-  // $scope.message = "Determining gelocation...";
-
-  // GeolocationService().then(function (position) {
-  //   $scope.position = position;
-  //   $scope.longitude = position.coords.longitude;
-  //   $scope.latitude = position.coords.latitude;
-
-  //   YelpDataService.getYelpData($scope.longitude, $scope.latitude)
-  //     .then(function(data) {
-  //       console.log('data from YelpDataService', data);
-  //     });
-
-  // }, function (reason) {
-  //   $scope.message = "Could not be determined."
-  // });
 
 })
 
