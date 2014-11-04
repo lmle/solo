@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // Serve static files
 app.use(express.static(__dirname));
 
-// Serve index.html
+// Serve index.html with any get request
 app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
