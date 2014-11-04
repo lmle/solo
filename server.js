@@ -1,13 +1,26 @@
-// var http = require('http');
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 8080;
 
 var app = express();
 
+// For CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+// Serve static files
+app.use(express.static(__dirname));
+
+// Serve index.html
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 
 var defaultCorsHeaders = {
   'access-control-allow-origin': '*',
@@ -48,13 +61,9 @@ var handleRequest = function(req, res) {
 
 };
 
-app.get('/', function(req, res) {
-  handleRequest(req, res);
-});
-
-app.post('/', function(req, res) {
+app.post('/yelp', function(req, res) {
   handleRequest(req, res);
 });
 
 app.listen(port);
-console.log('App is listening on ' + port);
+console.log('Listening on port', port);

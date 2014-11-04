@@ -17,7 +17,7 @@ angular.module('wtfsidn', [])
   var getYelpData = function(userLocation) {
     return $http({
       method: 'POST',
-      url: 'http://127.0.0.1:8080/',
+      url: '/yelp',
       data: 'userLocation='+userLocation,
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
       // headers: {'Content-Type': 'application/json'}
