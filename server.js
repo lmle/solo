@@ -22,13 +22,6 @@ app.get('/*', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-var defaultCorsHeaders = {
-  'access-control-allow-origin': '*',
-  'access-control-allow-methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'access-control-allow-headers': 'content-type, accept',
-  'access-control-max-age': 10
-};
-
 var yelp = require('yelp').createClient({
   consumer_key: 'FwKUb0xqcqzUq7H-ls-Y4Q', 
   consumer_secret: 'E_EMUTnLWkqCSgYkrsAgwwvKKB8',
@@ -40,8 +33,6 @@ var handleRequest = function(req, res) {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
 
   console.log('req.body', req.body);
-
-  res.header(defaultCorsHeaders);
 
   yelp.search({
     term: 'fun',
