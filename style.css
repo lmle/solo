@@ -1,5 +1,5 @@
 body, form input#autocomplete, form input[type="submit"] {
-  font-family: 'Oswald';
+  font-family: 'Oswald', Helvetica, Sans-Serif;
   text-transform: uppercase;
 }
 
@@ -56,7 +56,7 @@ div.suggestion a:hover {
 }
 
 div.suggestion button {
-  font-family: 'Oswald';
+  font-family: 'Oswald', Helvetica, Sans-Serif;
   font-size: 1.5em;
   color: #DF4949;
   background-color: transparent;
